@@ -1,6 +1,6 @@
-import { Router } from 'express';
+const { Router } = require('express');
 
-export const router = Router();
+const router = Router();
 
 router.get('/heroes', (req, res) => {
   res.status(200).json({
@@ -22,3 +22,5 @@ router.get('/heroes/:id', (req, res) => {
     })
   }
 })
+
+module.exports = { router }

@@ -1,5 +1,6 @@
-import express, { json, urlencoded } from 'express';
-import { router } from './routes/index.js';
+const { json, urlencoded } = require('express');
+const express = require('express');
+const { router } = require('./routes/index.js');
 // import errorHandler from './middlewares/error-handler';
 
 // [routes] start express
@@ -24,4 +25,4 @@ app.use((req, res, _next) => {
   });
 });
 
-export default app;
+module.exports = app;

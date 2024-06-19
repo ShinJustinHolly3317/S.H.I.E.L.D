@@ -1,6 +1,6 @@
-import http from 'http';
-import app from './app.js';
-import { defaultPort } from './config/index.js';
+const http = require('http');
+const app = require('./app.js');
+const { defaultPort } = require('./config/index.js');
 
 const port = Number(process.env.PORT || defaultPort);
 
