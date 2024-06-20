@@ -1,1 +1,4 @@
-export const defaultPort = 3000;
+const defaultPort = 3000;
+module.exports = {
+  defaultPort
+}
