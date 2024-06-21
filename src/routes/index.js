@@ -1,73 +1,33 @@
 const { Router } = require('express');
-const { HeroRepository } = require('../repositories/hero-repository')
-const { shieldDb } = require('../connections')
-const { passwordAuthenticator } = require('./utils/password-authenticator')
-
+const {
+  authHeaderValidations,
+  routeSkipperByValidation,
+} = require('../middlewares/password-authenticator');
+const { getHeroHandler } = require('./handlers/get-hero-handler');
+const {
+  getHeroProfileHandler,
+} = require('./handlers/get-hero-profile-handler');
+const { getHeroesHandler } = require('./handlers/get-heroes-handler');
+const {
+  getHeroProfilesHandler,
+} = require('./handlers/get-hero-profiles-handler');
 const router = Router();
 
-// router.use(passwordAuthenticator);
+router.get(
+  '/heroes',
+  authHeaderValidations,
+  routeSkipperByValidation,
+  getHeroProfilesHandler
+);
+router.get('/heroes', getHeroesHandler);
 
-router.get('/heroes', async (req, res, next) => {
-  console.log('first');
-
-  const { name, password } = req.headers;
-console.log(req.headers);
-  if (!passwordAuthenticator(name, password)) return next('route');
-
-
-  const heroRepo = new HeroRepository(shieldDb);
-  const allHeroes = await heroRepo.getAllHeroProfiles();
-  console.log(allHeroes);
-  res.status(200).json({
-    heroes: allHeroes,
-  })
-})
-
-router.get('/heroes', async (req, res) => {
-  console.log('second');
-  const heroRepo = new HeroRepository(shieldDb);
-  const allHeroes = await heroRepo.getAllHeroes();
-  res.status(200).json({
-    heroes: allHeroes,
-  })
-})
-
-
-router.get('/heroes/:id', async (req, res, next) => {
-  const { name, password } = req.headers;
-
-  if (!passwordAuthenticator(name, password)) return next('route');
-
-  const heroRepo = new HeroRepository(shieldDb);
-
-  const { id } = req.params
-
-  const hero = await heroRepo.getHeroProfile(id)
-  if (hero) {
-    res.status(200).json(hero)
-
-  } else {
-    res.status(404).json({
-      message: 'not found'
-    })
-  }
-})
-
-router.get('/heroes/:id', async (req, res) => {
-  const heroRepo = new HeroRepository(shieldDb);
-
-  const { id } = req.params
-
-  const hero = await heroRepo.getHero(id)
-  if (hero) {
-    res.status(200).json(hero)
-
-  } else {
-    res.status(404).json({
-      message: 'not found'
-    })
-  }
-})
+router.get(
+  '/heroes/:id',
+  authHeaderValidations,
+  routeSkipperByValidation,
+  getHeroProfileHandler
+);
+router.get('/heroes/:id', getHeroHandler);
 
 // router.post('/heroes', async (req, res) => {
 //   const heroRepo = new HeroRepository(shieldDb);
@@ -93,4 +53,4 @@ router.get('/heroes/:id', async (req, res) => {
 //   })
 // })
 
-module.exports = { router }
+module.exports = { router };

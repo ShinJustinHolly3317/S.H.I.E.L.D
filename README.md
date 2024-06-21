@@ -1,5 +1,5 @@
 # How to Use
-1. start server with docker compose
+1. start dev server with docker compose
 2. manually start dev server
 
 ## Migrations
