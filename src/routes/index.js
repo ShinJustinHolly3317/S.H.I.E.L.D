@@ -33,6 +33,26 @@ router.get('/heroes', async (req, res) => {
 })
 
 
+router.get('/heroes/:id', async (req, res, next) => {
+  const { name, password } = req.headers;
+
+  if (!passwordAuthenticator(name, password)) return next('route');
+
+  const heroRepo = new HeroRepository(shieldDb);
+
+  const { id } = req.params
+
+  const hero = await heroRepo.getHeroProfile(id)
+  if (hero) {
+    res.status(200).json(hero)
+
+  } else {
+    res.status(404).json({
+      message: 'not found'
+    })
+  }
+})
+
 router.get('/heroes/:id', async (req, res) => {
   const heroRepo = new HeroRepository(shieldDb);
 
@@ -49,28 +69,28 @@ router.get('/heroes/:id', async (req, res) => {
   }
 })
 
-router.post('/heroes', async (req, res) => {
-  const heroRepo = new HeroRepository(shieldDb);
-  await heroRepo.model.create({
-    id:5,
-    name: 'homeland',
-    image: 'https://test'
-  })
-  res.status(200).json({
-    message: 'success'
-  })
-})
+// router.post('/heroes', async (req, res) => {
+//   const heroRepo = new HeroRepository(shieldDb);
+//   await heroRepo.model.create({
+//     id:5,
+//     name: 'homeland',
+//     image: 'https://test'
+//   })
+//   res.status(200).json({
+//     message: 'success'
+//   })
+// })
 
-router.delete('/heroes/:id', async (req, res) => {
-  const heroRepo = new HeroRepository(shieldDb);
-  await heroRepo.model.destroy({
-    where: {
-      id: 5
-    }
-  })
-  res.status(200).json({
-    message: 'success'
-  })
-})
+// router.delete('/heroes/:id', async (req, res) => {
+//   const heroRepo = new HeroRepository(shieldDb);
+//   await heroRepo.model.destroy({
+//     where: {
+//       id: 5
+//     }
+//   })
+//   res.status(200).json({
+//     message: 'success'
+//   })
+// })
 
 module.exports = { router }
