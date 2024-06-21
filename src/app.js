@@ -1,6 +1,7 @@
 const { json, urlencoded } = require('express');
 const express = require('express');
 const { router } = require('./routes/index.js');
+// const { passwordAuthenticator } = require('./middlewares/password-authenticator.js')
 // import errorHandler from './middlewares/error-handler';
 
 // [routes] start express

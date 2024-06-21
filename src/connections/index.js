@@ -1,5 +1,6 @@
 const { Sequelize } = require('sequelize');
-const dbConnection = new Sequelize({
+const { ShieldDb } = require('../models')
+const sequelize = new Sequelize({
   host: process.env.DB_AD_WRITE_ADDRESS,
   database: 'shield',
   username: 'testuser',
@@ -9,7 +10,8 @@ const dbConnection = new Sequelize({
   logQueryParameters: true,
   logging: false,
 });
+const shieldDb = new ShieldDb(sequelize)
 
 module.exports = {
-  dbConnection,
+  shieldDb,
 };

@@ -7,15 +7,27 @@ class HeroRepository {
   }
 
   getHero(id) {
-    return this.model.findOne({
+    return this.model.Hero.findOne({
       where: {
         id,
-      }
+      },
     })
   }
 
   getAllHeroes() {
-    return this.model.findAll();
+    return this.model.Hero.findAll();
+  }
+
+  getAllHeroProfiles() {
+    return this.model.Hero.findAll({
+      include: {
+        model: this.model.Profile,
+        as: 'profile',
+        attributes: ['str', 'int', 'agi', 'luk']
+      },
+      raw: true,
+      nest: true,
+    })
   }
 }
 
