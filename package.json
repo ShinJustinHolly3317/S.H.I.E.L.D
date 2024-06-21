@@ -8,8 +8,10 @@
     "dev": "nodemon ./src/index.js",
     "migration-generate": "npx sequelize-cli migration:generate --migrations-path ./db-migration",
     "migration-development": "NODE_ENV=development npx  sequelize-cli db:migrate",
+    "migration-development-undo": "NODE_ENV=development npx  sequelize-cli db:migrate:undo",
     "seeds-generate": "npx sequelize-cli seed:generate --seeders-path ./db-migration/seeders",
-    "seeds-development": "NODE_ENV=development npx sequelize-cli db:seed"
+    "seeds-development": "NODE_ENV=development npx sequelize-cli db:seed",
+    "seeds-development-undo": "NODE_ENV=development npx sequelize-cli db:seed:undo"
   },
   "keywords": [],
   "author": "",
