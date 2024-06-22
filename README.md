@@ -35,7 +35,8 @@ npm run seeds-development-undo -- --seed ${file_name}.js
 ```
 
 # TODO
-1. test 
+1. ~~test~~
 2. docker compose 
 3. eslint
-4. typescript
+4. comments & README
+5. typescript

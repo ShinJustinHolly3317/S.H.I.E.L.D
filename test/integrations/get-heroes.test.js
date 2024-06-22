@@ -14,11 +14,17 @@ jest.mock('../../src/repositories/hero-repository', () => ({
   })),
 }));
 
-describe('GET /heroes/:id', () => {
+describe('GET /heroes', () => {
   const request = supertest(app);
+
   afterEach(() => {
     jest.clearAllMocks();
   });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
+
   it('[200] get heroes without auth info in header', (done) => {
     // mock
     mockGetAllHeroes.mockResolvedValueOnce([
@@ -95,56 +101,48 @@ describe('GET /heroes/:id', () => {
         name: 'Daredevil',
         image:
           'http://i.annihil.us/u/prod/marvel/i/mg/6/90/537ba6d49472b/standard_xlarge.jpg',
-        profile: [
-          {
-            str: 0,
-            int: 8,
-            agi: 10,
-            luk: 7,
-          },
-        ],
+        profile: {
+          str: 0,
+          int: 8,
+          agi: 10,
+          luk: 7,
+        },
       },
       {
         id: 2,
         name: 'Thor',
         image:
           'http://i.annihil.us/u/prod/marvel/i/mg/5/a0/537bc7036ab02/standard_xlarge.jpg',
-        profile: [
-          {
-            str: 8,
-            int: 2,
-            agi: 0,
-            luk: 14,
-          },
-        ],
+        profile: {
+          str: 8,
+          int: 2,
+          agi: 0,
+          luk: 14,
+        },
       },
       {
         id: 3,
         name: 'Iron Man',
         image:
           'http://i.annihil.us/u/prod/marvel/i/mg/6/a0/55b6a25e654e6/standard_xlarge.jpg',
-        profile: [
-          {
-            str: 6,
-            int: 9,
-            agi: 6,
-            luk: 9,
-          },
-        ],
+        profile: {
+          str: 6,
+          int: 9,
+          agi: 6,
+          luk: 9,
+        },
       },
       {
         id: 4,
         name: 'Hulk',
         image:
           'http://i.annihil.us/u/prod/marvel/i/mg/5/a0/538615ca33ab0/standard_xlarge.jpg',
-        profile: [
-          {
-            str: 10,
-            int: 1,
-            agi: 4,
-            luk: 2,
-          },
-        ],
+        profile: {
+          str: 10,
+          int: 1,
+          agi: 4,
+          luk: 2,
+        },
       },
     ]);
 
@@ -162,56 +160,48 @@ describe('GET /heroes/:id', () => {
               name: 'Daredevil',
               image:
                 'http://i.annihil.us/u/prod/marvel/i/mg/6/90/537ba6d49472b/standard_xlarge.jpg',
-              profile: [
-                {
-                  str: 0,
-                  int: 8,
-                  agi: 10,
-                  luk: 7,
-                },
-              ],
+              profile: {
+                str: 0,
+                int: 8,
+                agi: 10,
+                luk: 7,
+              },
             },
             {
               id: 2,
               name: 'Thor',
               image:
                 'http://i.annihil.us/u/prod/marvel/i/mg/5/a0/537bc7036ab02/standard_xlarge.jpg',
-              profile: [
-                {
-                  str: 8,
-                  int: 2,
-                  agi: 0,
-                  luk: 14,
-                },
-              ],
+              profile: {
+                str: 8,
+                int: 2,
+                agi: 0,
+                luk: 14,
+              },
             },
             {
               id: 3,
               name: 'Iron Man',
               image:
                 'http://i.annihil.us/u/prod/marvel/i/mg/6/a0/55b6a25e654e6/standard_xlarge.jpg',
-              profile: [
-                {
-                  str: 6,
-                  int: 9,
-                  agi: 6,
-                  luk: 9,
-                },
-              ],
+              profile: {
+                str: 6,
+                int: 9,
+                agi: 6,
+                luk: 9,
+              },
             },
             {
               id: 4,
               name: 'Hulk',
               image:
                 'http://i.annihil.us/u/prod/marvel/i/mg/5/a0/538615ca33ab0/standard_xlarge.jpg',
-              profile: [
-                {
-                  str: 10,
-                  int: 1,
-                  agi: 4,
-                  luk: 2,
-                },
-              ],
+              profile: {
+                str: 10,
+                int: 1,
+                agi: 4,
+                luk: 2,
+              },
             },
           ],
         });
@@ -308,5 +298,43 @@ describe('GET /heroes/:id', () => {
         done();
       })
       .catch((err) => done(err));
-  })
+  });
+
+  it('[500] HeroRepository throw error when not carring auth info in header', (done) => {
+    // mock
+    mockGetAllHeroes.mockRejectedValueOnce(new Error('random orm error'));
+
+    // test
+    request
+      .get('/heroes')
+      .expect(500)
+      .then((resp) => {
+        expect(resp.body).toEqual({
+          message: 'internal error',
+        });
+        expect(mockGetAllHeroes).toHaveBeenCalledTimes(1);
+        done();
+      })
+      .catch((err) => done(err));
+  });
+
+  it('[500] HeroRepository throw error when carring correct auth info in header', (done) => {
+    // mock
+    mockGetAllHeroProfiles.mockRejectedValueOnce(new Error('random orm error'));
+
+    // test
+    request
+      .get('/heroes')
+      .set('Name', 'testname')
+      .set('Password', 'test')
+      .expect(500)
+      .then((resp) => {
+        expect(resp.body).toEqual({
+          message: 'internal error',
+        });
+        expect(mockGetAllHeroProfiles).toHaveBeenCalledTimes(1);
+        done();
+      })
+      .catch((err) => done(err));
+  });
 });

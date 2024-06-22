@@ -16,7 +16,7 @@ module.exports = {
         res.status(200).json(hero);
       } else {
         res.status(404).json({
-          message: 'not found',
+          message: 'I am sorry, no hero here.',
         });
       }
     } catch (error) {

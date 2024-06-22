@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --detectOpenHandles --coverage --setupFiles dotenv-flow/config",
+    "test": "NODE_ENV=test jest --detectOpenHandles --coverage --setupFiles dotenv-flow/config --silent",
     "dev": "NODE_ENV=development nodemon -r dotenv-flow/config ./src/index.js",
     "migration-generate": "npx sequelize-cli migration:generate --migrations-path ./db-migration",
     "migration-development": "NODE_ENV=development npx  sequelize-cli db:migrate",

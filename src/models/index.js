@@ -69,8 +69,9 @@ class ShieldDb {
       }
     })
 
-    Hero.hasMany(Profile, {
+    Hero.hasOne(Profile, {
       as: 'profile',
+      foreignKey: 'heroId'
     })
     Profile.belongsTo(Hero)
   }
