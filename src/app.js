@@ -1,6 +1,7 @@
 const { json, urlencoded } = require('express');
 const express = require('express');
 const { router } = require('./routes/index.js');
+const { errorHandler } = require('./middlewares/error-handler.js')
 // const { passwordAuthenticator } = require('./middlewares/password-authenticator.js')
 // import errorHandler from './middlewares/error-handler';
 
@@ -17,7 +18,7 @@ app.use(json());
 app.use('/', router);
 
 // set up error handler
-// app.use(errorHandler);
+app.use(errorHandler);
 
 // set up 404 route
 app.use((req, res, _next) => {

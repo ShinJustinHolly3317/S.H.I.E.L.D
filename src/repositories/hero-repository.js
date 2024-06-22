@@ -6,16 +6,17 @@ class HeroRepository {
     this.model = model;
   }
 
-  getHero(id) {
-    return this.model.Hero.findOne({
+  async getHero(id) {
+    const heroDao = await this.model.Hero.findOne({
       where: {
         id,
       },
     })
+    return heroDao?.toJSON();
   }
 
-  getHeroProfile(id) {
-    return this.model.Hero.findOne({
+  async getHeroProfile(id) {
+    const heroProfileDao = await this.model.Hero.findOne({
       where: {
         id,
       },
@@ -24,25 +25,24 @@ class HeroRepository {
         as: 'profile',
         attributes: ['str', 'int', 'agi', 'luk']
       },
-      raw: true,
-      nest: true,
     })
+    return heroProfileDao?.toJSON() 
   }
 
-  getAllHeroes() {
-    return this.model.Hero.findAll();
+  async getAllHeroes() {
+    const heroesDao = await this.model.Hero.findAll();
+    return heroesDao?.map((heroDao) => heroDao.toJSON())
   }
 
-  getAllHeroProfiles() {
-    return this.model.Hero.findAll({
+  async getAllHeroProfiles() {
+    const heroProfilesDao = await this.model.Hero.findAll({
       include: {
         model: this.model.Profile,
         as: 'profile',
         attributes: ['str', 'int', 'agi', 'luk']
       },
-      raw: true,
-      nest: true,
     })
+    return heroProfilesDao?.map((heroProfileDao) => heroProfileDao.toJSON())
   }
 }
 

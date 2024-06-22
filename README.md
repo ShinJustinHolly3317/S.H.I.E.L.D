@@ -5,8 +5,37 @@
 ## Migrations
 
 ### Generation
-1. `npm run migration-generate -- --name ${NAME_OF_YOUR_MIGRATION}`
-2. Change the file extension of the generated migration from `.js` to `.ts`
-
+```
+npm run migration-generate -- --name ${file_name}
+```
 ### Running Migrations
-`npm run migration`
+migration
+```
+npm run migration-{env}
+```
+undo migration
+```
+npm run migration-{env}-undo
+```
+
+## Seeders
+### Generation
+```
+npm run seeds-generate -- --name ${file_name}
+```
+
+### Running seeds
+create seeder (file name needs extension)
+```
+npm run seeds-{env} -- --seed ${file_name}.js
+```
+undo seeder (file name needs extension)
+```
+npm run seeds-development-undo -- --seed ${file_name}.js
+```
+
+# TODO
+1. test 
+2. docker compose 
+3. eslint
+4. typescript
