@@ -12,7 +12,8 @@ module.exports = {
 		}
 	},
 	development: {
-		host: 'localhost',
+		// host: 'localhost',
+		host: 'mysql-8.0_shield',
 		database: 'shield',
 		username: 'testuser',
 		password: 'test',

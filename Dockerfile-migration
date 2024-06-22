@@ -1,0 +1,8 @@
+FROM --platform=amd64 node:20-alpine
+WORKDIR /app
+
+COPY . .
+
+RUN npm ci
+
+CMD ["sh", "-c", "NODE_ENV=development npm run migration-development && npm run seeds-development -- --seed 20240619151605-marvel-assemble-4.js"]

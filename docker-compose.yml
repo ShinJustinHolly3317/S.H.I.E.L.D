@@ -1,0 +1,46 @@
+version: '3'
+name: marvel-shield
+services:
+  database:
+    container_name: "mysql-8.0_shield"
+    image: mysql:8
+    platform: linux/amd64
+    expose:
+      - 3306
+    environment:
+      - MYSQL_DATABASE=shield
+      - MYSQL_USER=testuser
+      - MYSQL_PASSWORD=test
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_TCP_PORT=3306
+    healthcheck:
+      test: mysqladmin ping -h localhost -u testuser --password=test
+      start_period: 5s
+      interval: 5s
+      retries: 5
+      timeout: 30s
+    networks:
+      - dev_network
+  app:
+    build: 
+      dockerfile: Dockerfile
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      - NODE_ENV=development
+    networks:
+      - dev_network
+    ports:
+      - 3000:3000
+  migration:
+    build: 
+        dockerfile: Dockerfile-migration
+    container_name: "migration_seeder"
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - dev_network
+networks:
+  dev_network:
