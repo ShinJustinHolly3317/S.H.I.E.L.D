@@ -1,6 +1,6 @@
-const { DataTypes } = require('sequelize')
-const { Hero} = require('./hero')
-const { Profile} = require('./profile')
+const { DataTypes } = require('sequelize');
+const { Hero } = require('./hero');
+const { Profile } = require('./profile');
 
 class ShieldDb {
   constructor(sequelize) {
@@ -20,17 +20,17 @@ class ShieldDb {
       image: {
         type: DataTypes.STRING(255),
         allowNull: false,
-      }
+      },
     }, {
       sequelize,
       tableName: 'Heroes',
       paranoid: true,
       defaultScope: {
         attributes: {
-          exclude: ['createdAt', 'updatedAt', 'deletedAt']
-        }
-      }
-    })
+          exclude: ['createdAt', 'updatedAt', 'deletedAt'],
+        },
+      },
+    });
 
     Profile.init({
       id: {
@@ -64,19 +64,19 @@ class ShieldDb {
       paranoid: true,
       defaultScope: {
         attributes: {
-          exclude: ['createdAt', 'updatedAt', 'deletedAt']
-        }
-      }
-    })
+          exclude: ['createdAt', 'updatedAt', 'deletedAt'],
+        },
+      },
+    });
 
     Hero.hasOne(Profile, {
       as: 'profile',
-      foreignKey: 'heroId'
-    })
-    Profile.belongsTo(Hero)
+      foreignKey: 'heroId',
+    });
+    Profile.belongsTo(Hero);
   }
 }
 
 module.exports = {
-  ShieldDb
-}
+  ShieldDb,
+};

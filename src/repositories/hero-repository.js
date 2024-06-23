@@ -1,7 +1,4 @@
-
 class HeroRepository {
-  model;
-
   constructor(model) {
     this.model = model;
   }
@@ -11,7 +8,7 @@ class HeroRepository {
       where: {
         id,
       },
-    })
+    });
     return heroDao?.toJSON();
   }
 
@@ -23,15 +20,15 @@ class HeroRepository {
       include: {
         model: this.model.Profile,
         as: 'profile',
-        attributes: ['str', 'int', 'agi', 'luk']
+        attributes: ['str', 'int', 'agi', 'luk'],
       },
-    })
-    return heroProfileDao?.toJSON() 
+    });
+    return heroProfileDao?.toJSON();
   }
 
   async getAllHeroes() {
     const heroesDao = await this.model.Hero.findAll();
-    return heroesDao?.map((heroDao) => heroDao.toJSON())
+    return heroesDao?.map((heroDao) => heroDao.toJSON());
   }
 
   async getAllHeroProfiles() {
@@ -39,13 +36,13 @@ class HeroRepository {
       include: {
         model: this.model.Profile,
         as: 'profile',
-        attributes: ['str', 'int', 'agi', 'luk']
+        attributes: ['str', 'int', 'agi', 'luk'],
       },
-    })
-    return heroProfilesDao?.map((heroProfileDao) => heroProfileDao.toJSON())
+    });
+    return heroProfilesDao?.map((heroProfileDao) => heroProfileDao.toJSON());
   }
 }
 
 module.exports = {
-  HeroRepository
-}
+  HeroRepository,
+};

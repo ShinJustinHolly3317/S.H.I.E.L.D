@@ -1,4 +1,5 @@
 const { header, validationResult } = require('express-validator');
+
 const authSecret = {
   name: process.env.HEADER_AUTH_NAME,
   password: process.env.HEADER_AUTH_PASSWORD,

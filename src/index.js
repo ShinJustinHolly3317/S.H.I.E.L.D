@@ -1,5 +1,5 @@
 const http = require('http');
-const app = require('./app.js');
+const app = require('./app');
 const { defaultPort } = require('./config');
 
 const port = Number(process.env.PORT || defaultPort);

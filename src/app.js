@@ -1,9 +1,9 @@
 const { json, urlencoded } = require('express');
 const express = require('express');
-const { router } = require('./routes/index.js');
-const { errorHandler } = require('./middlewares/error-handler.js')
-// const { passwordAuthenticator } = require('./middlewares/password-authenticator.js')
-// import errorHandler from './middlewares/error-handler';
+const expressJSDocSwagger = require('express-jsdoc-swagger');
+const { router } = require('./routes/index');
+const { errorHandler } = require('./middlewares/error-handler');
+const { swaggerOptions } = require('./config');
 
 // [routes] start express
 const app = express();
@@ -19,6 +19,8 @@ app.use('/', router);
 
 // set up error handler
 app.use(errorHandler);
+
+expressJSDocSwagger(app)(swaggerOptions);
 
 // set up 404 route
 app.use((req, res, _next) => {

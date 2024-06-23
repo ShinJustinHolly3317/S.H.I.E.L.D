@@ -3,7 +3,7 @@ module.exports = {
     console.log('[error handler]', err);
 
     return res.status(500).json({
-      message: 'internal error'
-    })
-  }
-}
+      message: 'internal error',
+    });
+  },
+};
