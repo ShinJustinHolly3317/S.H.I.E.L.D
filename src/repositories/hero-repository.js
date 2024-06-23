@@ -20,7 +20,6 @@ class HeroRepository {
       include: {
         model: this.model.Profile,
         as: 'profile',
-        attributes: ['str', 'int', 'agi', 'luk'],
       },
     });
     return heroProfileDao?.toJSON();
@@ -36,7 +35,6 @@ class HeroRepository {
       include: {
         model: this.model.Profile,
         as: 'profile',
-        attributes: ['str', 'int', 'agi', 'luk'],
       },
     });
     return heroProfilesDao?.map((heroProfileDao) => heroProfileDao.toJSON());

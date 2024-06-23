@@ -2,11 +2,17 @@ const { DataTypes } = require('sequelize');
 const { Hero } = require('./hero');
 const { Profile } = require('./profile');
 
+/**
+ * Build all tables into models and create association between them.
+ * 1. init: create DB models
+ * 2. associate: create foreign key of models
+ */
 class ShieldDb {
   constructor(sequelize) {
     this.Hero = Hero;
     this.Profile = Profile;
 
+    // 1. init
     Hero.init({
       id: {
         type: DataTypes.INTEGER,
@@ -69,6 +75,7 @@ class ShieldDb {
       },
     });
 
+    // 2. associate
     Hero.hasOne(Profile, {
       as: 'profile',
       foreignKey: 'heroId',

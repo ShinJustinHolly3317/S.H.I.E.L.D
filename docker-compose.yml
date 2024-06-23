@@ -28,7 +28,7 @@ services:
       database:
         condition: service_healthy
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=docker_compose
     networks:
       - dev_network
     ports:

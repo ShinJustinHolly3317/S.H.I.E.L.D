@@ -2,11 +2,11 @@ const { Sequelize } = require('sequelize');
 const { ShieldDb } = require('../models');
 
 const sequelize = new Sequelize({
-  host: process.env.DB_AD_WRITE_ADDRESS,
-  database: 'shield',
-  username: 'testuser',
-  password: 'test',
-  port: parseInt(process.env.DB_AD_WRITE_PORT, 10) || 3306,
+  host: process.env.DB_ADDRESS,
+  database: process.env.DB_DATABASE,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  port: parseInt(process.env.DB_PORT, 10) || 3306,
   dialect: 'mysql',
   logQueryParameters: true,
   logging: false,
