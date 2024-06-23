@@ -118,6 +118,10 @@ erDiagram
 
 其中 `createdAt`, `updatedAt`, `deletedAt` 算是稽核作用，追蹤該筆資料狀態，並在 `deletedAt` 使用 Sequelize 預設的軟刪除功能。
 
+# API Doc
+`/api-docs`
+可以從這邊看 api-doc
+
 # 第三方套件使用
 ### express-validator
 這是一個相容於 Express.js 框架的驗證套件。
@@ -132,6 +136,12 @@ erDiagram
 
 ### Sequelize
 這是 ORM 套件，也是我較熟悉的套件，選擇原因單純只是因為我比較熟悉，我希望快速建立 migration, seeder 等等檔案。
+
+### express-swagger-jsdoc
+可以藉由 JSDoc 直接產生 Swagger API Doc，簡單呼叫套件 API 即可秒產，如果沒有特殊需求，我認為這個方式產生非常方便。
+
+# 註解原則
+
 ### Migrations
 
 ### Generation
