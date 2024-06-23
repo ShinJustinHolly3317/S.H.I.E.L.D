@@ -3,7 +3,7 @@ const { Hero } = require('./hero');
 const { Profile } = require('./profile');
 
 /**
- * Build all tables into models and create association between them.
+ * Create model for tables and define their association.
  * 1. init: create DB models
  * 2. associate: create foreign key of models
  */

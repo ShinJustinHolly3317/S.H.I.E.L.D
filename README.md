@@ -1,5 +1,5 @@
 # 神盾局
-這裏可以查詢最新 Marvel 登入的超級英雄們🦸🦸‍♀️
+這裡可以查詢最新 Marvel 登入的超級英雄們🦸🦸‍♀️
 
 # How to Use
 提供兩種啟動 local server 方式
@@ -163,6 +163,6 @@ erDiagram
 3. 多步驟的邏輯，會使用 1./2. .. 標示步驟，讓邏輯比較清晰 
 
 # 挑戰
-1. docker compose：過程中花蠻多時間 debug 環境變數，參數設置等等。很可惜時間關係還沒有處理得很完整。
-2. sequelize migration：一開始有在想資料來源要直接 call hahow api 就好，還是自己建立 DB。決定勇敢一回建立 DB，因此面對 0->1 構思要怎麼寫 model, migration 等等。
-3. handler：本來想要單純用 if/else 處理 auth header，但突然想到有 `next('route')` 這個用法很適合，因此想嘗試這個寫法，花了點時間創造這個 middleware。
+1. docker compose：過程中花蠻多時間 debug 環境變數，參數設置。
+2. sequelize migration：一開始有在想資料來源要直接 call hahow api 就好，還是自己建立 DB。決定勇敢一回建立 DB，因此面對 0->1 構思要怎麼寫 model, migration 等等，花了不少時間閱讀文件與自己的筆記。
+3. handler：本來想要單純用 if/else 處理 auth header，但突然想到有 `next('route')` 這個用法很適合，因此想嘗試這個寫法，花了點時間閱讀文件來創造這個 middleware。
