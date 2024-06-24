@@ -142,9 +142,11 @@ erDiagram
 這是一個相容於 Express.js 框架的驗證套件。
 他的用法相容於 express middleware 的用法，並且用法也很直觀。
 
-### dotenv-flow
+### dotenv-flow & dotenv-flow cli
 這款套件讓我可以使用多種環境變數檔，並且只要命名 pattern 是以下 `.env.{environment_name}` 就可以
-他會根據當下的 `NODE_ENV` 去找相對應的環境檔，對於部署來說很好用
+他會根據當下的 `NODE_ENV` 去找相對應的環境檔，對於部署來說很好用。
+
+而 dotenv-flow cli 是可以直接執行後，吃到環境變數，因此可以套用在 migration 單純執行檔案的情境。
 
 ### supertest & jest
 這款是 NodeJs 中常用的測試框架，因為時間關係，我只有做 E2E tests，因此使用了 supertest，並使用 jest mock 資料。
