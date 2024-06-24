@@ -37,6 +37,8 @@ services:
     build: 
         dockerfile: Dockerfile-migration
     container_name: "migration_seeder"
+    environment:
+      - NODE_ENV=docker_compose
     depends_on:
       database:
         condition: service_healthy
