@@ -49,6 +49,7 @@ npm run seeds-development -- --seed 20240619151605-marvel-assemble-4.js
 ```
 
 ### 啟動 server 
+注意 NodeJs >= v20
 ```
 npm run dev
 ```
