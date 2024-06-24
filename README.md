@@ -157,6 +157,9 @@ erDiagram
 ### pm2
 這個工具寫在 Dockerfile 中，用意為避免程式意外關閉，整個 container 就停止。
 
+### eslint
+format 工具，可以藉由這個工具規範程式碼風格，讓團隊看起來一致。
+
 # 註解原則
 1. 變數、function、method 命名已經不夠解釋請楚
 2. 看起來很不一般的用法
